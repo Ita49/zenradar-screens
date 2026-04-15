@@ -1,0 +1,7 @@
+{
+  "name": "ZenRadar — Splash Screen Builder",
+  "id": "zenradar-splash-builder",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"]
+}

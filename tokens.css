@@ -1,0 +1,490 @@
+/* ============================================================
+   ZENRADAR — Design Tokens
+   Mobile-First Job Discovery Platform
+   Vijetan Careers | Project Delta
+   ============================================================
+   HOW TO USE:
+   Import this file at the top of every screen's CSS:
+     @import url('tokens.css');
+   Then reference variables like: color: var(--color-primary);
+   ============================================================ */
+
+:root {
+
+  /* ----------------------------------------------------------
+     COLOURS — derived from ZenRadar logo
+  ---------------------------------------------------------- */
+
+  /* Primary Blue (logo mid-tone — main interactive colour) */
+  --color-primary:          #2E72C2;
+  --color-primary-dark:     #1A3D7C;   /* logo deep navy — splash, pressed states */
+  --color-primary-light:    #5BB3E0;   /* logo highlight sweep — gradients */
+  --color-primary-tint:     #EBF4FB;   /* chip backgrounds, subtle highlights */
+
+  /* Accent (used sparingly — Apply button, badges only) */
+  --color-accent:           #F26419;
+  --color-accent-tint:      #FEF0E7;
+
+  /* Backgrounds */
+  --color-background:       #F7F9FB;   /* app background */
+  --color-surface:          #FFFFFF;   /* cards, sheets, modals */
+  --color-surface-raised:   #FFFFFF;   /* elevated cards (with shadow) */
+
+  /* Text */
+  --color-text-primary:     #111827;   /* job titles, headings */
+  --color-text-secondary:   #4A5568;   /* company name, location (logo slate) */
+  --color-text-muted:       #9CA3AF;   /* timestamps, placeholders, captions */
+  --color-text-inverse:     #FFFFFF;   /* text on dark/primary backgrounds */
+  --color-text-link:        #2E72C2;   /* hyperlinks */
+
+  /* Borders & Dividers */
+  --color-border:           #E5E7EB;
+  --color-border-focus:     #2E72C2;
+
+  /* Semantic Colours */
+  --color-error:            #DC2626;
+  --color-error-tint:       #FEF2F2;
+  --color-success:          #16A34A;
+  --color-success-tint:     #F0FDF4;
+  --color-warning:          #D97706;
+  --color-warning-tint:     #FFFBEB;
+
+  /* Application Tracker Status Colours */
+  --color-status-saved:     #4A5568;   /* slate grey */
+  --color-status-applied:   #2E72C2;   /* primary blue */
+  --color-status-interview: #D97706;   /* amber */
+  --color-status-offer:     #16A34A;   /* green */
+  --color-status-rejected:  #DC2626;   /* red */
+
+  /* Overlay */
+  /* Overlay is split into RGB + alpha to map cleanly into Figma variables */
+  --color-overlay-rgb:      17, 24, 39;
+  --color-overlay-alpha:    0.5;
+  --color-overlay:          rgba(var(--color-overlay-rgb), var(--color-overlay-alpha));
+
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY — DM Sans (Google Fonts)
+     Import in HTML: 
+     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  ---------------------------------------------------------- */
+
+  --font-family:            'DM Sans', sans-serif;
+
+  /* Font Sizes (sp — use px for HTML, maps 1:1 on 160dpi) */
+  --text-xs:                12px;    /* caption, timestamps */
+  --text-sm:                13px;    /* labels, chips, tags */
+  --text-base:              14px;    /* body small, secondary info */
+  --text-md:                15px;    /* body text, descriptions */
+  --text-lg:                17px;    /* job title on card */
+  --text-xl:                20px;    /* section headers */
+  --text-2xl:               24px;    /* screen titles */
+  --text-3xl:               28px;    /* splash / onboarding headline */
+  --text-4xl:               34px;    /* hero text */
+
+  /* Font Weights */
+  --font-light:             300;
+  --font-regular:           400;
+  --font-medium:            500;
+  --font-semibold:          600;
+  --font-bold:              700;
+
+  /* Line Heights */
+  --leading-tight:          1.2;
+  --leading-snug:           1.35;
+  --leading-normal:         1.5;
+  --leading-relaxed:        1.65;
+
+  /* Letter Spacing */
+  --tracking-tight:         -0.02em;
+  --tracking-normal:        0;
+  --tracking-wide:          0.04em;
+  --tracking-wider:         0.08em;
+
+
+  /* ----------------------------------------------------------
+     SPACING — 8dp grid system
+     All spacing is a multiple of 4 or 8.
+     Use like: padding: var(--space-4);  (= 16px)
+  ---------------------------------------------------------- */
+
+  --space-0:    0px;
+  --space-1:    4px;    /* micro — icon inner padding */
+  --space-2:    8px;    /* tight — between label + value */
+  --space-3:    12px;   /* compact inner padding */
+  --space-4:    16px;   /* standard — card inner padding */
+  --space-5:    20px;   /* card vertical spacing */
+  --space-6:    24px;   /* section gap */
+  --space-7:    28px;   /* medium section break */
+  --space-8:    32px;   /* large section break */
+  --space-10:   40px;   /* screen-level top padding */
+  --space-12:   48px;   /* generous vertical breathing room */
+  --space-16:   64px;   /* hero section spacing */
+  --space-20:   80px;   /* bottom nav clearance */
+
+
+  /* ----------------------------------------------------------
+     BORDER RADIUS
+  ---------------------------------------------------------- */
+
+  --radius-sm:    6px;    /* chips, small tags */
+  --radius-md:    10px;   /* input fields */
+  --radius-lg:    14px;   /* job cards */
+  --radius-xl:    20px;   /* bottom sheets, modals */
+  --radius-full:  9999px; /* pills, avatar circles, toggle */
+
+
+  /* ----------------------------------------------------------
+     SHADOWS — elevation system
+  ---------------------------------------------------------- */
+
+  --shadow-sm:    0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md:    0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg:    0 8px 24px rgba(0, 0, 0, 0.10), 0 4px 8px rgba(0, 0, 0, 0.06);
+  --shadow-card:  0 2px 8px rgba(46, 114, 194, 0.08);  /* blue-tinted card shadow */
+  --shadow-nav:   0 -1px 0 rgba(0, 0, 0, 0.06), 0 -4px 16px rgba(0, 0, 0, 0.04);
+
+
+  /* ----------------------------------------------------------
+     LAYOUT — mobile canvas
+  ---------------------------------------------------------- */
+
+  --screen-width:       390px;    /* iOS standard canvas */
+  --screen-min-width:   360px;    /* Android minimum */
+  --content-padding:    var(--space-4);   /* 16px horizontal page padding */
+  --nav-height:         64px;     /* bottom tab bar height */
+  --header-height:      56px;     /* top header bar height */
+  --safe-area-bottom:   34px;     /* iPhone home indicator clearance */
+  --card-gap:           var(--space-3);   /* gap between job cards */
+
+
+  /* ----------------------------------------------------------
+     ICONS — sizes, stroke weight, and colour roles
+  ---------------------------------------------------------- */
+
+  --icon-sm:              16px;    /* inline card icons (e.g. bookmark on job card) */
+  --icon-md:              20px;    /* standard action icons */
+  --icon-lg:              24px;    /* navigation bar icons */
+  --icon-xl:              40px;    /* empty-state illustrations */
+
+  --icon-stroke:          1.75;    /* default SVG stroke-width for outline icons */
+  --icon-stroke-bold:     2;       /* slightly bolder stroke for emphasis */
+
+  --color-icon-default:   #9CA3AF; /* inactive / unsaved state — maps to --color-text-muted */
+  --color-icon-active:    #2E72C2; /* active nav tab, saved bookmark — maps to --color-primary */
+  --color-icon-accent:    #F26419; /* accent action icons — maps to --color-accent */
+
+  --nav-icon-size:        24px;    /* bottom navigation icon size */
+  --nav-label-size:       12px;    /* bottom navigation tab label font size */
+
+
+  /* ----------------------------------------------------------
+     TAP TARGETS — minimum 44x44px (WCAG + Apple HIG)
+  ---------------------------------------------------------- */
+
+  --tap-min:    44px;
+
+
+  /* ----------------------------------------------------------
+     TRANSITIONS
+  ---------------------------------------------------------- */
+
+  --transition-fast:    150ms ease;
+  --transition-base:    250ms ease;
+  --transition-slow:    400ms ease;
+  --transition-spring:  300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+
+  /* ----------------------------------------------------------
+     Z-INDEX SCALE
+  ---------------------------------------------------------- */
+
+  --z-base:       0;
+  --z-card:       10;
+  --z-sticky:     20;
+  --z-overlay:    30;
+  --z-sheet:      40;
+  --z-nav:        50;
+  --z-modal:      60;
+  --z-toast:      70;
+
+}
+
+
+/* ============================================================
+   GLOBAL RESET & BASE STYLES
+   Include this in every screen file.
+============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--text-md);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile canvas wrapper — use on every screen */
+.screen {
+  width: 100%;
+  max-width: var(--screen-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  background-color: var(--color-background);
+  position: relative;
+  overflow-x: hidden;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: var(--font-family);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, textarea, select {
+  font-family: var(--font-family);
+  font-size: var(--text-md);
+}
+
+a {
+  color: var(--color-text-link);
+  text-decoration: none;
+}
+
+
+/* ============================================================
+   COMPONENT TOKENS — reusable class patterns
+   Reference these in screen files for consistency.
+============================================================ */
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  padding: 0 var(--space-6);
+  border-radius: var(--radius-full);
+  font-size: var(--text-md);
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-wide);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+.btn-primary:active {
+  background-color: var(--color-primary-dark);
+  transform: scale(0.98);
+}
+
+.btn-accent {
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
+}
+.btn-accent:active {
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary);
+}
+.btn-secondary:active {
+  background-color: var(--color-primary-tint);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+}
+
+/* --- Input Fields --- */
+.input {
+  width: 100%;
+  min-height: var(--tap-min);
+  padding: 0 var(--space-4);
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-md);
+  color: var(--color-text-primary);
+  transition: border-color var(--transition-fast);
+  outline: none;
+}
+.input:focus {
+  border-color: var(--color-border-focus);
+}
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* --- Job Card --- */
+.job-card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+}
+
+/* --- Bookmark Icon (job card save action) --- */
+.bookmark-icon {
+  width: var(--icon-sm);       /* 16px */
+  height: calc(var(--icon-sm) * 1.375); /* 22px — bookmark aspect ratio */
+  color: var(--color-icon-default);
+  flex-shrink: 0;
+  transition: color var(--transition-fast);
+}
+.bookmark-icon.saved {
+  color: var(--color-icon-active);
+}
+
+/* --- Chip / Tag --- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  background-color: var(--color-primary-tint);
+  color: var(--color-primary);
+}
+
+/* --- Fresh Badge (posted time) --- */
+.fresh-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  background-color: var(--color-success-tint);
+  color: var(--color-success);
+}
+
+/* --- Divider --- */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+/* --- Social Sign-In Button --- */
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: var(--tap-min);
+  padding: 0 var(--space-4);
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-md);
+  font-weight: var(--font-medium);
+  color: var(--color-text-primary);
+  transition: background-color var(--transition-fast);
+}
+.btn-social:active {
+  background-color: var(--color-background);
+}
+
+/* --- Bottom Tab Bar --- */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--screen-width);
+  height: var(--nav-height);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  z-index: var(--z-nav);
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+  justify-content: center;
+  color: var(--color-icon-default);
+  font-size: var(--nav-label-size);
+  font-weight: var(--font-medium);
+  transition: color var(--transition-fast);
+}
+
+.tab-item.active {
+  color: var(--color-icon-active);
+}
+
+.tab-item svg {
+  width: var(--nav-icon-size);
+  height: var(--nav-icon-size);
+  flex-shrink: 0;
+}
+
+/* --- Status Badge (Application Tracker) --- */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: var(--font-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+.status-saved     { background: #F1F5F9; color: var(--color-status-saved); }
+.status-applied   { background: var(--color-primary-tint); color: var(--color-status-applied); }
+.status-interview { background: var(--color-warning-tint); color: var(--color-status-interview); }
+.status-offer     { background: var(--color-success-tint); color: var(--color-status-offer); }
+.status-rejected  { background: var(--color-error-tint); color: var(--color-status-rejected); }

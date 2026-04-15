@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ZenRadar — Splash</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <!-- Design tokens — shared across all screens -->
+  <link rel="stylesheet" href="tokens.css" />
+
+  <style>
+    /* ── Screen: Splash — layout & component overrides ───── */
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Override base .screen for full-bleed splash */
+    .screen {
+      height: 100dvh;
+      min-height: unset;
+      background-color: var(--color-primary-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Background — layered gradient matching logo ──────── */
+    .bg-gradient {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 30%,
+          rgba(91, 179, 224, 0.18) 0%,
+          transparent 70%),
+        radial-gradient(ellipse 60% 80% at 80% 80%,
+          rgba(46, 114, 194, 0.25) 0%,
+          transparent 60%),
+        linear-gradient(160deg,
+          #1F4F9A 0%,
+          var(--color-primary-dark) 40%,
+          #132E60 100%);
+      z-index: var(--z-base);
+    }
+
+    /* ── Radar ring pattern ────────────────────────────────── */
+    .bg-rings {
+      position: absolute;
+      inset: 0;
+      z-index: var(--z-base);
+      overflow: hidden;
+    }
+
+    .bg-rings::before,
+    .bg-rings::after {
+      content: '';
+      position: absolute;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .bg-rings::before { width: 500px; height: 500px; }
+    .bg-rings::after  { width: 700px; height: 700px; }
+
+    .ring {
+      position: absolute;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .ring-1 { width: 280px; height: 280px; }
+    .ring-2 { width: 420px; height: 420px; }
+    .ring-3 { width: 560px; height: 560px; border-color: rgba(255, 255, 255, 0.025); }
+
+    /* ── Main content ─────────────────────────────────────── */
+    .content {
+      position: relative;
+      z-index: var(--z-card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ── Logo icon ─────────────────────────────────────────── */
+    .logo-icon {
+      width: 96px;
+      height: 96px;
+      margin-bottom: var(--space-5);
+      animation:
+        logoReveal var(--transition-spring) both,
+        radarPulse 2.4s ease 1.6s infinite;
+    }
+
+    /* ── Wordmark ─────────────────────────────────────────── */
+    .wordmark {
+      display: flex;
+      align-items: baseline;
+      gap: 0;
+      animation: fadeUp var(--transition-slow) ease 0.3s both;
+    }
+
+    .wordmark-zen {
+      font-size: 36px;             /* intentional: above text-4xl (34px) for hero impact */
+      font-weight: var(--font-bold);
+      color: var(--color-text-inverse);
+      letter-spacing: var(--tracking-tight);
+    }
+
+    .wordmark-radar {
+      font-size: 36px;
+      font-weight: var(--font-light);
+      color: rgba(255, 255, 255, 0.75);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Tagline ──────────────────────────────────────────── */
+    .tagline {
+      margin-top: var(--space-2);
+      font-size: var(--text-sm);   /* 13px */
+      font-weight: var(--font-regular);
+      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      animation: fadeUp var(--transition-slow) ease 0.5s both;
+    }
+
+    /* ── Loading bar ──────────────────────────────────────── */
+    .loader-wrap {
+      position: absolute;
+      bottom: 72px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: var(--z-card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-4);
+      animation: fadeIn var(--transition-base) ease 0.8s both;
+    }
+
+    .loader-track {
+      width: 48px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .loader-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-primary-light), var(--color-text-inverse));
+      border-radius: var(--radius-full);
+      animation: loadProgress 1.8s ease 0.9s forwards;
+    }
+
+    /* ── Bottom brand ─────────────────────────────────────── */
+    .bottom-brand {
+      position: absolute;
+      bottom: var(--space-8);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: var(--z-card);
+      font-size: 11px;
+      font-weight: var(--font-medium);
+      color: rgba(255, 255, 255, 0.25);
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+      white-space: nowrap;
+      animation: fadeIn var(--transition-base) ease 1s both;
+    }
+
+    /* ── Keyframes ────────────────────────────────────────── */
+    @keyframes logoReveal {
+      from { opacity: 0; transform: scale(0.6) rotate(-15deg); }
+      to   { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes loadProgress {
+      0%   { width:   0%; }
+      30%  { width:  35%; }
+      60%  { width:  65%; }
+      85%  { width:  88%; }
+      100% { width: 100%; }
+    }
+
+    @keyframes radarPulse {
+      0%, 100% { opacity: 1;    }
+      50%      { opacity: 0.75; }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="screen">
+
+  <!-- Background layers -->
+  <div class="bg-gradient"></div>
+  <div class="bg-rings">
+    <div class="ring ring-1"></div>
+    <div class="ring ring-2"></div>
+    <div class="ring ring-3"></div>
+  </div>
+
+  <!-- Main content: logo + wordmark + tagline -->
+  <div class="content">
+
+    <!-- SVG Logo Icon — ZenRadar radar mark -->
+    <svg class="logo-icon" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="iconGrad" x1="20" y1="20" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#7EC8E8"/>
+          <stop offset="50%"  stop-color="#2E72C2"/>
+          <stop offset="100%" stop-color="#1A3D7C"/>
+        </linearGradient>
+        <linearGradient id="sweepGrad" x1="48" y1="20" x2="80" y2="10" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#FFFFFF" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#7EC8E8"  stop-opacity="0.6"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Outer arc ring -->
+      <path d="M 14 48 A 34 34 0 1 1 48 82" stroke="url(#iconGrad)" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.7"/>
+      <!-- Middle arc ring -->
+      <path d="M 22 48 A 26 26 0 1 1 48 74" stroke="url(#iconGrad)" stroke-width="3"   stroke-linecap="round" fill="none" opacity="0.85"/>
+      <!-- Inner arc ring -->
+      <path d="M 30 48 A 18 18 0 1 1 48 66" stroke="url(#iconGrad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <!-- Sweep needle -->
+      <line x1="48" y1="48" x2="74" y2="18" stroke="url(#sweepGrad)" stroke-width="3" stroke-linecap="round"/>
+      <!-- Centre dot -->
+      <circle cx="48" cy="48" r="5"   fill="white"         opacity="0.95"/>
+      <circle cx="48" cy="48" r="2.5" fill="url(#iconGrad)"/>
+    </svg>
+
+    <!-- Wordmark -->
+    <div class="wordmark">
+      <span class="wordmark-zen">Zen</span>
+      <span class="wordmark-radar">Radar</span>
+    </div>
+
+    <!-- Tagline -->
+    <p class="tagline">Fresh tech jobs · Daily</p>
+
+  </div>
+
+  <!-- Loading progress bar -->
+  <div class="loader-wrap">
+    <div class="loader-track">
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+
+  <!-- Vijetan Careers brand -->
+  <p class="bottom-brand">Vijetan Careers</p>
+
+</div>
+
+</body>
+</html>
