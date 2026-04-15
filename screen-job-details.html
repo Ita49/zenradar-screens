@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ZenRadar — Job Details</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="tokens.css" />
+
+  <style>
+    /* ── Screen: Job Details ───────────────────────────────── */
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .screen {
+      position: relative;
+      min-height: 100dvh;
+      padding-bottom: 92px; /* clear fixed footer */
+    }
+
+    /* ── Top header bar ───────────────────────────────────── */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: var(--z-sticky);
+      background: var(--color-surface);
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    /* Back button sits inside the header — override top to centre within it */
+    .header .back-btn {
+      position: absolute;
+      top: 50%;
+      left: var(--space-1);
+      transform: translateY(-50%);
+    }
+
+    .header-title {
+      font-size: var(--text-md);
+      font-weight: var(--font-semibold);
+      color: var(--color-text-primary);
+      letter-spacing: -0.2px;
+    }
+
+    /* ── Content ──────────────────────────────────────────── */
+    .content {
+      padding: var(--space-4);
+    }
+
+    /* ── Job hero ─────────────────────────────────────────── */
+    .job-hero {
+      display: flex;
+      gap: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+
+    .company-logo {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      background: var(--color-primary-tint);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-md);
+      font-weight: var(--font-semibold);
+      color: var(--color-primary);
+    }
+
+    .job-meta {
+      flex: 1;
+    }
+
+    .job-title {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-semibold);
+      color: var(--color-text-primary);
+      letter-spacing: -0.3px;
+      line-height: var(--leading-snug);
+      margin-bottom: var(--space-1);
+    }
+
+    .job-company {
+      font-size: var(--text-base);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-1);
+    }
+
+    .job-posted {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+
+    /* ── Chips row ────────────────────────────────────────── */
+    .chips-row {
+      display: flex;
+      gap: var(--space-2);
+      margin-bottom: var(--space-5);
+    }
+
+    .chip-outline {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-1) var(--space-4);
+      height: 36px;
+      border-radius: var(--radius-full);
+      font-size: var(--text-base);
+      font-weight: var(--font-medium);
+      background: transparent;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-secondary);
+    }
+
+    /* ── Section divider ──────────────────────────────────── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: var(--space-5) 0;
+    }
+
+    /* ── Section headings ─────────────────────────────────── */
+    .section-heading {
+      font-size: var(--text-lg);
+      font-weight: var(--font-semibold);
+      color: var(--color-text-primary);
+      letter-spacing: -0.3px;
+      margin-bottom: var(--space-3);
+    }
+
+    .section-body {
+      font-size: var(--text-md);
+      color: var(--color-text-secondary);
+      line-height: var(--leading-normal);
+      margin-bottom: var(--space-5);
+    }
+
+    /* ── Requirements list ────────────────────────────────── */
+    .req-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      margin-bottom: var(--space-5);
+    }
+
+    .req-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-2);
+      font-size: var(--text-md);
+      color: var(--color-text-secondary);
+      line-height: var(--leading-normal);
+    }
+
+    .req-bullet {
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      background: var(--color-primary);
+      border-radius: 3px;
+      margin-top: 8px;
+    }
+
+    /* ── Tech stack chips ─────────────────────────────────── */
+    .tech-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-bottom: var(--space-5);
+    }
+
+    /* ── Company card ─────────────────────────────────────── */
+    .company-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .company-card-logo {
+      width: 40px;
+      height: 40px;
+      background: var(--color-primary-tint);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-xs);
+      font-weight: var(--font-semibold);
+      color: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    .company-card-name {
+      font-size: var(--text-base);
+      font-weight: var(--font-semibold);
+      color: var(--color-text-primary);
+      letter-spacing: -0.2px;
+    }
+
+    .company-card-meta {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+
+    /* ── Fixed footer CTA ─────────────────────────────────── */
+    .footer-cta {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: var(--screen-width);
+      background: var(--color-surface);
+      padding: var(--space-4);
+      padding-bottom: max(var(--space-4), env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--color-border);
+      box-shadow: var(--shadow-nav);
+      z-index: var(--z-sticky);
+    }
+
+    .btn-apply {
+      width: 100%;
+      height: 52px;
+      background: var(--color-accent);
+      color: var(--color-text-inverse);
+      border: none;
+      border-radius: var(--radius-full);
+      font-family: var(--font-family);
+      font-size: var(--text-md);
+      font-weight: var(--font-semibold);
+      letter-spacing: var(--tracking-wide);
+      cursor: pointer;
+      transition: opacity var(--transition-fast);
+    }
+
+    .btn-apply:active {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+<div class="screen">
+
+  <!-- Header with back arrow + centered title -->
+  <header class="header">
+    <button class="back-btn" onclick="history.back()">
+      <svg width="24" height="24" viewBox="0 0 24 24"
+        fill="none" stroke="#111827" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </button>
+    <span class="header-title">Job Details</span>
+  </header>
+
+  <!-- Scrollable content -->
+  <div class="content">
+
+    <!-- Job hero -->
+    <div class="job-hero">
+      <div class="company-logo">AT</div>
+      <div class="job-meta">
+        <h1 class="job-title">Senior Product Designer</h1>
+        <p class="job-company">Atlassian · Sydney, NSW</p>
+        <p class="job-posted">Posted 2h ago</p>
+      </div>
+    </div>
+
+    <!-- Type + work style chips -->
+    <div class="chips-row">
+      <span class="chip">Full-time</span>
+      <span class="chip chip-outline">Hybrid</span>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- About the role -->
+    <h2 class="section-heading">About the role</h2>
+    <p class="section-body">Lead end-to-end product design for Jira and Confluence. You'll work closely with product managers, engineers, and researchers to define, design, and ship elegant solutions that serve millions of users worldwide.</p>
+
+    <!-- Requirements -->
+    <h2 class="section-heading">Requirements</h2>
+    <ul class="req-list">
+      <li><span class="req-bullet"></span>5+ years of product design experience</li>
+      <li><span class="req-bullet"></span>Figma proficiency and design systems expertise</li>
+      <li><span class="req-bullet"></span>Experience working in agile, cross-functional teams</li>
+    </ul>
+
+    <!-- Tech stack -->
+    <h2 class="section-heading">Tech stack</h2>
+    <div class="tech-chips">
+      <span class="chip">Figma</span>
+      <span class="chip">Design Systems</span>
+      <span class="chip">UX Research</span>
+    </div>
+
+    <!-- About company -->
+    <h2 class="section-heading">About Atlassian</h2>
+    <div class="company-card">
+      <div class="company-card-logo">AT</div>
+      <div>
+        <p class="company-card-name">Atlassian</p>
+        <p class="company-card-meta">Software · 10,000+ employees</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Fixed Apply Now footer -->
+  <div class="footer-cta">
+    <button class="btn-apply">Apply Now</button>
+  </div>
+
+</div>
+
+</body>
+</html>

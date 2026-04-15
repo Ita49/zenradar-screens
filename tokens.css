@@ -473,6 +473,27 @@ a {
   flex-shrink: 0;
 }
 
+/* --- Back Navigation Button --- */
+.back-btn {
+  position: absolute;
+  top: 52px;
+  left: var(--space-4);
+  width: var(--tap-min);
+  height: var(--tap-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  transition: background var(--transition-fast);
+  z-index: var(--z-sticky);
+}
+.back-btn:active {
+  background: rgba(0, 0, 0, 0.06);
+}
+
 /* --- Status Badge (Application Tracker) --- */
 .status-badge {
   display: inline-flex;
