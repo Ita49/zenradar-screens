@@ -72,6 +72,7 @@
   --font-family:            'DM Sans', sans-serif;
 
   /* Font Sizes (sp — use px for HTML, maps 1:1 on 160dpi) */
+  --text-xxs:               11px;    /* all-caps labels: status badges, section group headers */
   --text-xs:                12px;    /* caption, timestamps */
   --text-sm:                13px;    /* labels, chips, tags */
   --text-base:              14px;    /* body small, secondary info */
@@ -478,7 +479,7 @@ a {
   align-items: center;
   padding: 3px var(--space-2);
   border-radius: var(--radius-full);
-  font-size: 11px;
+  font-size: var(--text-xxs);
   font-weight: var(--font-semibold);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);
